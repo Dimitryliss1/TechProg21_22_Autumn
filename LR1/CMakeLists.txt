@@ -3,4 +3,4 @@ project(LR1)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(LR1 main.cpp)
+add_executable(LR1 main.cpp Characters.cpp Characters.h)
