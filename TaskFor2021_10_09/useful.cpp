@@ -63,7 +63,7 @@ void printStatsForAllReceipts(const std::vector<Receipt>& receipts) {
 }
 
 void printStatsForProduct(std::string name, const std::vector<Product>& available_prods, const std::vector<Receipt>& receipts){
-    name = to_lower(name);
+    name = trim(to_lower(name));
     bool flag = false;
     Product found;
     for (auto & available_prod : available_prods){
@@ -99,4 +99,22 @@ void printStatsForProduct(std::string name, const std::vector<Product>& availabl
         std::cout << "К сожалению, этот товар еще не фигурировал ни в одном чеке.\n";
     }
 
+}
+
+void ltrim(std::string &s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    }));
+}
+
+void rtrim(std::string &s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    }).base(), s.end());
+}
+
+std::string trim(std::string s){
+    ltrim(s);
+    rtrim(s);
+    return s;
 }

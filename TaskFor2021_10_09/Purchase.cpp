@@ -3,6 +3,7 @@
 //
 
 #include "Purchase.h"
+#include "useful.h"
 
 Purchase::Purchase() = default;
 
@@ -11,7 +12,7 @@ const std::vector<Counter<Product>> Purchase::getPurchases() const {
 }
 
 void Purchase::pushUnit(std::string name, int amt, const std::vector<Product>& available_prods) {
-    name = to_lower(name);
+    name = trim(to_lower(name));
     bool flag = false;
     Product found;
     for (auto & available_prod : available_prods){
@@ -37,7 +38,7 @@ void Purchase::pushUnit(std::string name, int amt, const std::vector<Product>& a
 }
 
 void Purchase::popNUnits(std::string name, int amt, const std::vector<Product>& available_prods) {
-    name = to_lower(name);
+    name = trim(to_lower(name));
     bool flag = false;
     Product found;
     for (auto & available_prod : available_prods){
@@ -66,7 +67,7 @@ void Purchase::popNUnits(std::string name, int amt, const std::vector<Product>& 
 }
 
 void Purchase::popAllUnitsOfArticle(std::string name, const std::vector<Product>& available_prods) {
-    name = to_lower(name);
+    name = trim(to_lower(name));
     bool flag = false;
     Product found;
     for (auto & available_prod : available_prods){

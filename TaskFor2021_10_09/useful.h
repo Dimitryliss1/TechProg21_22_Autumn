@@ -16,6 +16,13 @@
 #include "Product.h"
 #endif
 
+#include <algorithm>
+#include <cctype>
+#include <locale>
+
+void ltrim(std::string &s);
+void rtrim(std::string &s);
+std::string trim(std::string s);
 
 int safe_input();
 std::string safe_input_str();
