@@ -24,6 +24,7 @@ public:
     Receipt();
     ~Receipt() override;
     void printPurchase() override;
+    bool isEmpty();
 };
 
 

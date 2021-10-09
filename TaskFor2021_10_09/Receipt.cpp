@@ -10,6 +10,10 @@ Receipt::Receipt() = default;
 
 void Receipt::printPurchase() {
     std::vector<Counter<Product>>res = getPurchases();
+    if (res.empty()){
+        std::cout << "Список пуст." << std::endl;
+        return;
+    }
     std::cout << "Список покупок:" << std::endl;
     unsigned int total = 0;
     for(int i = 0; i < res.size(); i++){
@@ -17,8 +21,12 @@ void Receipt::printPurchase() {
                   << "Название товара: " << res[i].first.getProductName() << std::endl
                   << "Цена за единицу: " << res[i].first.getProductPrice() << std::endl
                   << "Всего куплено: " << res[i].second << " ед. товара "
-                  << "На сумму " << res[i].second * res[i].first.getProductPrice() << std::endl;
+                  << "На сумму " << res[i].second * res[i].first.getProductPrice() << " у.е." << std::endl;
         total += res[i].second * res[i].first.getProductPrice();
     }
     std::cout << "Общая стоимость покупки: " << total << " у.е." << std::endl;
+}
+
+bool Receipt::isEmpty() {
+    return getPurchases().empty();
 }
