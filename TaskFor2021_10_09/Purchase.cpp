@@ -4,16 +4,9 @@
 
 #include "Purchase.h"
 
-Purchase::Purchase() {}
+Purchase::Purchase() = default;
 
-Purchase::Purchase(Product firstProd) {
-    Counter<Product> tmp;
-    tmp.first = firstProd;
-    tmp.second = 1;
-    items.push_back(tmp);
-}
-
-const std::vector<Counter<Product>> Purchase::getPurchases() {
+const std::vector<Counter<Product>> Purchase::getPurchases() const {
     return items;
 }
 
@@ -94,7 +87,8 @@ void Purchase::popAllUnitsOfArticle(std::string name, std::vector<Product> avail
         }
         cnt++;
     }
-    return;
 }
+
+Purchase::~Purchase() {}
 
 

@@ -27,8 +27,8 @@ class Purchase {
     std::vector<Counter<Product>> items;
 public:
     Purchase();
-    explicit Purchase(Product firstProd);
-    const std::vector<Counter<Product>> getPurchases();
+    virtual ~Purchase();
+    const std::vector<Counter<Product>> getPurchases() const;
     void pushUnit(std::string name, int amt, const std::vector<Product>& available_prods);
     void popNUnits(std::string name, int amt, const std::vector<Product>& available_prods);
     void popAllUnitsOfArticle(std::string name, std::vector<Product> available_prods);
