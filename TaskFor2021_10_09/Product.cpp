@@ -11,14 +11,6 @@ std::string to_lower(std::string src){
     return src;
 }
 
-unsigned int Product::getProductId() const {
-    return productID;
-}
-
-void Product::setProductId(unsigned int newId) {
-    productID = newId;
-}
-
 unsigned int Product::getProductPrice() const {
     return productPrice;
 }
@@ -35,14 +27,12 @@ void Product::setProductName(const std::string &newName) {
     Product::productName = newName;
 }
 
-Product::Product(): productID(0), productPrice(0), productName("null") {}
+Product::Product(): productPrice(0), productName("null") {}
 
-Product::Product(unsigned int newID, unsigned int newPrice, std::string &newName): productID(newID),
-                                                                                   productPrice(newPrice),
-                                                                                   productName(newName){}
+Product::Product(unsigned int newPrice, std::string &newName): productPrice(newPrice),
+                                                               productName(newName){}
 
 bool Product::operator==(const Product &rhs) const {
-    return productID == rhs.productID &&
-           productPrice == rhs.productPrice &&
+    return productPrice == rhs.productPrice &&
            productName == rhs.productName;
 }

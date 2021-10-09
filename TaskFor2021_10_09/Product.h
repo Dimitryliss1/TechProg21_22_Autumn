@@ -10,14 +10,11 @@
 std::string to_lower(std::string src);
 
 class Product {
-    unsigned int productID;
     unsigned int productPrice;
     std::string productName;
 public:
     Product();
-    Product(unsigned int newID, unsigned int newPrice, std::string& newName);
-    unsigned int getProductId() const;
-    void setProductId(unsigned int productId);
+    Product(unsigned int newPrice, std::string& newName);
     unsigned int getProductPrice() const;
     void setProductPrice(unsigned int productPrice);
     const std::string &getProductName() const;
