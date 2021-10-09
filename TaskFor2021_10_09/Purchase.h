@@ -31,7 +31,7 @@ public:
     const std::vector<Counter<Product>> getPurchases() const;
     void pushUnit(std::string name, int amt, const std::vector<Product>& available_prods);
     void popNUnits(std::string name, int amt, const std::vector<Product>& available_prods);
-    void popAllUnitsOfArticle(std::string name, std::vector<Product> available_prods);
+    void popAllUnitsOfArticle(std::string name, const std::vector<Product>& available_prods);
     virtual void printPurchase() = 0;
 };
 

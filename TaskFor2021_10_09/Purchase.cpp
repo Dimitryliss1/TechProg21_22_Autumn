@@ -22,7 +22,7 @@ void Purchase::pushUnit(std::string name, int amt, const std::vector<Product>& a
         }
     }
     if (!flag) {
-        throw(NotFoundInListException("No such item in available products"));
+        throw(NotFoundInListException("Такого товара нет в списке доступных продуктов"));
     }
     for (auto & item: items){
         if (item.first == found){
@@ -48,7 +48,7 @@ void Purchase::popNUnits(std::string name, int amt, const std::vector<Product>& 
         }
     }
     if (!flag) {
-        throw(NotFoundInListException("No such item in available products"));
+        throw(NotFoundInListException("Такого товара нет в списке доступных продуктов"));
     }
     int cnt = 0;
     for (auto & item: items){
@@ -62,10 +62,10 @@ void Purchase::popNUnits(std::string name, int amt, const std::vector<Product>& 
         }
         cnt++;
     }
-    throw(NotFoundInListException("No such item in current receipt"));
+    throw(NotFoundInListException("Такого товара нет в чеке"));
 }
 
-void Purchase::popAllUnitsOfArticle(std::string name, std::vector<Product> available_prods) {
+void Purchase::popAllUnitsOfArticle(std::string name, const std::vector<Product>& available_prods) {
     name = to_lower(name);
     bool flag = false;
     Product found;
@@ -77,7 +77,7 @@ void Purchase::popAllUnitsOfArticle(std::string name, std::vector<Product> avail
         }
     }
     if (!flag) {
-        throw(NotFoundInListException("No such item in available products"));
+        throw(NotFoundInListException("Такого товара нет в списке доступных"));
     }
     int cnt = 0;
     for (auto & item: items){
