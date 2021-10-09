@@ -16,8 +16,9 @@
 #include "Product.h"
 #endif
 
-template<typename T>
-T safe_input(std::istream &in);
+
+int safe_input();
+std::string safe_input_str();
 
 void printStatsForAllReceipts(const std::vector<Receipt>& receipts);
 

@@ -4,24 +4,24 @@
 
 #include "useful.h"
 
-template<typename T>
-T safe_input(std::istream &in){
-    T res;
-    in >> res;
-    while (in.fail()){
+
+int safe_input(){
+    int res;
+    std::cin >> res;
+    while (std::cin.fail()) {
         std::cout << "Что-то пошло не так" << std::endl
                   << "Попробуйте еще раз: ";
-        in.clear();
-        in.ignore(32767, '\n');
-        in >> res;
+        std::cin.clear();
+        std::cin.ignore(32767, '\n');
+        std::cin >> res;
     }
     return res;
 }
 
-template<>
-std::string safe_input(std::istream &in){
+std::string safe_input_str(){
     std::string res;
-    getline(in, res);
+//    std::cin.ignore();
+    getline(std::cin >> std::ws, res);
     return res;
 }
 
@@ -45,6 +45,10 @@ void printStatsForAllReceipts(const std::vector<Receipt>& receipts) {
     }
 
     int total;
+    if (res.empty()){
+        std::cout << "Вы пока не создали ни одного чека, либо все они были пустые\n";
+        return;
+    }
     std::cout << "Статистика по всем чекам: " << std::endl;
     int cnt = 1;
     for (const auto &item: res) {
@@ -52,7 +56,8 @@ void printStatsForAllReceipts(const std::vector<Receipt>& receipts) {
                   << "Название товара: " << item.first.getProductName() << std::endl
                   << "Цена за единицу товара: " << item.first.getProductPrice() << std::endl
                   << "Всего куплено: " << item.second << " единиц." << std::endl
-                  << "На сумму " << item.second * item.first.getProductPrice() << std::endl << std::endl;
+                  << "На сумму " << item.second * item.first.getProductPrice() << " у.е." << std::endl;
+        cnt++;
     }
 
 }
@@ -69,7 +74,7 @@ void printStatsForProduct(std::string name, const std::vector<Product>& availabl
         }
     }
     if (!flag) {
-        throw (NotFoundInListException("No such item in available products"));
+        throw (NotFoundInListException("Такого товара нет в списке доступных товаров"));
     }
 
     Counter<Product> res;
@@ -89,7 +94,9 @@ void printStatsForProduct(std::string name, const std::vector<Product>& availabl
         std::cout << "Товар " << res.first.getProductName() << ":" << std::endl
                   << "Цена за единицу: " << res.first.getProductPrice() << std::endl
                   << "Всего куплено: " << res.second << " шт." << std::endl
-                  << "На сумму " << res.second * res.first.getProductPrice() << std::endl;
+                  << "На сумму " << res.second * res.first.getProductPrice() << " у.е." << std::endl;
+    } else {
+        std::cout << "К сожалению, этот товар еще не фигурировал ни в одном чеке.\n";
     }
 
 }
