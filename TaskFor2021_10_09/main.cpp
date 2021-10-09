@@ -117,9 +117,8 @@ int main() {
                         std::cout << "Введите количество товара.\nЭто число обязательно целое и положительное, дробная часть будет отсечена: ";
                         int amt = safe_input();
                         while (amt <= 0) {
-                            std::cout
-                                    << "Количество товара обязательно целое и положительное, дробная часть будет отсечена.\n"
-                                       "Попробуйте еще раз: ";
+                            std::cout << "Количество товара обязательно целое и положительное, дробная часть будет отсечена.\n"
+                                         "Попробуйте еще раз: ";
                             amt = safe_input();
                         }
                         try {
@@ -173,7 +172,7 @@ int main() {
                 } else if (rec_choice == 5){
                     system("clear");
                     for (auto & i : all_prod){
-                        std::cout << i.getProductName() << " " << i.getProductPrice() << std::endl;
+                        std::cout << i.getProductName() << ". Цена: " << i.getProductPrice() << " у.е." << std::endl;
                     }
                 }
             }

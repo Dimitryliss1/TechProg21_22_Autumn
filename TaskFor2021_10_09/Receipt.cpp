@@ -21,7 +21,7 @@ void Receipt::printPurchase() {
                   << "Название товара: " << res[i].first.getProductName() << std::endl
                   << "Цена за единицу: " << res[i].first.getProductPrice() << std::endl
                   << "Всего куплено: " << res[i].second << " ед. товара "
-                  << "На сумму " << res[i].second * res[i].first.getProductPrice() << " у.е." << std::endl;
+                  << "на сумму " << res[i].second * res[i].first.getProductPrice() << " у.е." << std::endl << std::endl;
     }
     std::cout << "Общая стоимость покупки: " << total << " у.е." << std::endl;
 }
