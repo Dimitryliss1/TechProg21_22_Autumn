@@ -100,4 +100,12 @@ int getTotalSum(Purchase* purchase) {
     return total;
 }
 
+std::vector<std::string> getItemNames(Purchase* purchase){
+    std::vector<std::string>res;
+    for(auto & i : purchase->getPurchases()){
+        res.push_back(i.first.getProductName());
+    }
+    return res;
+}
+
 

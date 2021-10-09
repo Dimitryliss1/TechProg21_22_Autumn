@@ -84,17 +84,27 @@ int main() {
             cur = Receipt();
             system("clear");
             while(true){
+                if (getItemNames(&cur).empty()) std::cout << "В корзине сейчас нет товаров\n";
+                else {
+                    std::cout << "В корзине есть следующие наименования: ";
+                    std::vector<std::string>tmp = getItemNames(&cur);
+                    for(int i = 0; i < tmp.size(); i++){
+                        if (i) std::cout << ", ";
+                        std::cout << tmp[i];
+                    }
+                    std::cout << std::endl << "Общая сумма - " << getTotalSum(&cur) << " у.е." << std::endl;
+                }
+
                 std::cout << "Выберите действие:\n"
                              "1. Добавить товар в чек\n"
                              "2. Удалить одну единицу товара из чека\n"
                              "3. Удалить все позиции товара из чека\n"
                              "4. Показать чек\n"
                              "5. Вывести список доступных товаров\n"
-                             "6. Вывести сумму всех товаров в чеке\n"
                              "0. Закрыть чек и выйти в меню\n"
                              "Ваш выбор: ";
                 int rec_choice = safe_input();
-                while (rec_choice < 0 || rec_choice > 6){
+                while (rec_choice < 0 || rec_choice > 5){
                     std::cout << "Такого действия нет.\nПопробуйте еще раз: ";
                     rec_choice = safe_input();
                 }
@@ -165,10 +175,6 @@ int main() {
                     for (auto & i : all_prod){
                         std::cout << i.getProductName() << " " << i.getProductPrice() << std::endl;
                     }
-                } else if (rec_choice == 6){
-                    system("clear");
-                    if (getTotalSum(&cur) == 0) std::cout << "Вы еще ничего не положили в корзину.\n";
-                    else std::cout << "Вы набрали товаров на сумму " << getTotalSum(&cur) << " у.е.\n";
                 }
             }
             system("clear");

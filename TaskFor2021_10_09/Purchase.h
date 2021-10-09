@@ -35,5 +35,6 @@ public:
     virtual void printPurchase() = 0;
 };
 int getTotalSum(Purchase* purchase);
+std::vector<std::string> getItemNames(Purchase* purchase);
 
 #endif //TASKFOR2021_10_09_PURCHASE_H
