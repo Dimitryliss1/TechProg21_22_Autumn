@@ -34,6 +34,6 @@ public:
     void popAllUnitsOfArticle(std::string name, const std::vector<Product>& available_prods);
     virtual void printPurchase() = 0;
 };
-
+int getTotalSum(Purchase* purchase);
 
 #endif //TASKFOR2021_10_09_PURCHASE_H

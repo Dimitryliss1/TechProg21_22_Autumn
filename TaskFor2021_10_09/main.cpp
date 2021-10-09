@@ -90,10 +90,11 @@ int main() {
                              "3. Удалить все позиции товара из чека\n"
                              "4. Показать чек\n"
                              "5. Вывести список доступных товаров\n"
+                             "6. Вывести сумму всех товаров в чеке\n"
                              "0. Закрыть чек и выйти в меню\n"
                              "Ваш выбор: ";
                 int rec_choice = safe_input();
-                while (rec_choice < 0 || rec_choice > 5){
+                while (rec_choice < 0 || rec_choice > 6){
                     std::cout << "Такого действия нет.\nПопробуйте еще раз: ";
                     rec_choice = safe_input();
                 }
@@ -164,6 +165,10 @@ int main() {
                     for (auto & i : all_prod){
                         std::cout << i.getProductName() << " " << i.getProductPrice() << std::endl;
                     }
+                } else if (rec_choice == 6){
+                    system("clear");
+                    if (getTotalSum(&cur) == 0) std::cout << "Вы еще ничего не положили в корзину.\n";
+                    else std::cout << "Вы набрали товаров на сумму " << getTotalSum(&cur) << " у.е.\n";
                 }
             }
             system("clear");

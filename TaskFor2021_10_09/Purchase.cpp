@@ -91,4 +91,13 @@ void Purchase::popAllUnitsOfArticle(std::string name, const std::vector<Product>
 
 Purchase::~Purchase() {}
 
+int getTotalSum(Purchase* purchase) {
+    std::vector<Counter<Product>>tmp = purchase->getPurchases();
+    int total = 0;
+    for(auto & i : tmp){
+        total += i.first.getProductPrice() * i.second;
+    }
+    return total;
+}
+
 
