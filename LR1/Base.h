@@ -2,21 +2,21 @@
 // Created by Павел Жуков on 06/10/2021.
 //
 
-#ifndef LR1_CHARACTERS_H
-#define LR1_CHARACTERS_H
+#ifndef LR1_BASE_H
+#define LR1_BASE_H
 
 #include <iostream>
 
-class Characters {
+class Base {
     std::string type;
 public:
     virtual void printParams(std::ostream &out) = 0;
-    virtual ~Characters();
-    Characters();
-    explicit Characters(std::string newType);
-    Characters(const Characters& character);
-    std::string getType();
+    virtual ~Base();
+    Base();
+    explicit Base(std::string newType);
+    Base(const Base& character);
+    std::string getType() const;
 };
 
 
-#endif //LR1_CHARACTERS_H
+#endif //LR1_BASE_H
