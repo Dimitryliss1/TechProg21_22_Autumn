@@ -5,7 +5,7 @@
 #ifndef LR1_HERO_H
 #define LR1_HERO_H
 
-#ifndef LR1_FIGURE_H
+#ifndef LR1_BASE_H
 #include "Base.h"
 #endif
 

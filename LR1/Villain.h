@@ -6,7 +6,7 @@
 #define LR1_VILLAIN_H
 
 
-#ifndef LR1_FIGURE_H
+#ifndef LR1_BASE_H
 #include "Base.h"
 #endif
 
