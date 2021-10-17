@@ -29,6 +29,7 @@ public:
     const std::string &getPlaceOfLiving() const;
     void setPlaceOfLiving(const std::string &placeOfLiving);
     std::string getInfoForFile() override;
+    std::string getNormalName();
 };
 
 

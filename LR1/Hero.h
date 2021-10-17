@@ -27,6 +27,8 @@ public:
     const std::string &getAbilities() const;
     void addAbility(const std::string& Ability);
     std::string getInfoForFile() override;
+
+    const std::string &getNormalName() const;
 };
 
 

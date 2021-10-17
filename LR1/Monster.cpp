@@ -62,6 +62,10 @@ std::string Monster::getInfoForFile() {
     return std::string(getType() + "\n" + name + "\n" + a + "\n" + description + "\n");
 }
 
+std::string Monster::getNormalName() {
+    return *to_lower(name);
+}
+
 
 
 

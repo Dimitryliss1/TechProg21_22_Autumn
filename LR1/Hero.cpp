@@ -67,3 +67,8 @@ std::string Hero::getInfoForFile() {
     delete tmp;
     return std::string(getType() + "\n" + name + "\n" + weaponType + "\n" + a + "\n" + abilities + "\n");
 }
+
+const std::string &Hero::getNormalName() const {
+    std::string* a = to_lower(name);
+    return *a;
+}

@@ -3,6 +3,7 @@
 //
 
 #include "Villain.h"
+#include "useful.h"
 
 void Villain::printParams(std::ostream &out) {
     out << "Name: " << name << std::endl
@@ -60,6 +61,10 @@ void Villain::setPlaceOfLiving(const std::string &placeOfLiving) {
 
 std::string Villain::getInfoForFile() {
     return std::string(getType() + "\n" + name + "\n" + weaponType + "\n" + placeOfLiving + "\n");
+}
+
+std::string Villain::getNormalName() {
+    return *to_lower(name);
 }
 
 

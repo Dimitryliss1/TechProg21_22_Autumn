@@ -25,6 +25,7 @@ public:
     void setDescription(const std::string &description);
     bool operator==(const Monster &rhs) const;
     std::string getInfoForFile() override;
+    std::string getNormalName()
 };
 
 
