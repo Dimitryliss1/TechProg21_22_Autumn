@@ -103,8 +103,8 @@ std::string CourtCase::getInfoForFile() {
 void CourtCase::printInfo(std::ostream &out) {
     out << "Case title: " << title << "\n"
         << "Case description: " << description << "\n"
-        << "Responcible officer: " << responsible.getName() << "\n"
-        << "Suspicted criminal: " << criminal.getName() << "\n"
+        << "Responsible officer: " << responsible.getName() << "\n"
+        << "Suspected criminal: " << criminal.getName() << "\n"
         << "Used monsters: " << "\n";
     for (int i = 0; i < unique_monsters_amt; i++){
         out << i + 1 << ".\n"
