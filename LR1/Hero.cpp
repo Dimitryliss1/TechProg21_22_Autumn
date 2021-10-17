@@ -37,14 +37,24 @@ void Hero::printParams(std::ostream &out) {
 Hero::Hero() : Base("Hero"),
                name("null null"),
                weaponType("null-47"),
-               abilities("None"){}
+               abilities("None"){
+    std::cout << "Empty Hero created!" << std::endl;
+}
 
-Hero::Hero(std::string newName, std::string newWeaponType, std::string newAbilities) : Base("Hero"),
-                                                                                       name(newName),
-                                                                                       weaponType(newWeaponType),
-                                                                                       abilities(newAbilities) {}
+Hero::Hero(std::string& newName, std::string& newWeaponType, std::string& newAbilities) : Base("Hero"),
+                                                                                          name(newName),
+                                                                                          weaponType(newWeaponType),
+                                                                                          abilities(newAbilities) {
+    std::cout << "Hero with parameters created!" << std::endl;
+}
 
 Hero::Hero(const Hero &character) : Base(character.getType()),
                                     name(character.getName()),
                                     weaponType(character.getWeaponType()),
-                                    abilities(character.getAbilities()) {}
+                                    abilities(character.getAbilities()){
+    std::cout << "Hero copied!" << std::endl;
+}
+
+Hero::~Hero() {
+    std::cout << "Hero destroyed" << std::endl;
+}
