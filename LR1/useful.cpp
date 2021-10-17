@@ -22,6 +22,7 @@ int safe_input(){
         std::cin.ignore(32767, '\n');
         std::cin >> res;
     }
+    std::cin.ignore();
     return res;
 }
 
