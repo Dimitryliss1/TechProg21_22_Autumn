@@ -8,5 +8,7 @@
 #include <iostream>
 
 int get_amt_of_strings(std::string& a);
+int safe_input();
+std::string* to_lower(std::string input);
 
 #endif //LR1_USEFUL_H
