@@ -15,16 +15,19 @@
 class Villain: public Base {
     std::string name;
     std::string weaponType;
+    std::string placeOfLiving;
 public:
     void printParams(std::ostream &out) override;
     Villain();
-    Villain(std::string& name, std::string& weaponType);
+    Villain(std::string& name, std::string& weaponType, std::string& newPlace);
     Villain(Villain& src);
     ~Villain();
     const std::string &getName() const;
     void setName(const std::string &name);
     const std::string &getWeaponType() const;
     void setWeaponType(const std::string &weaponType);
+    const std::string &getPlaceOfLiving() const;
+    void setPlaceOfLiving(const std::string &placeOfLiving);
 };
 
 

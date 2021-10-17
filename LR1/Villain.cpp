@@ -27,24 +27,35 @@ void Villain::setWeaponType(const std::string &weaponType) {
 
 Villain::Villain(): Base("Villain"),
                     name("null"),
-                    weaponType("null"){
+                    weaponType("null"),
+                    placeOfLiving("null"){
     std::cout << "Empty villain created!" << std::endl;
 }
 
-Villain::Villain(std::string &name, std::string &weaponType): Base("Villain"),
-                                                              name(name),
-                                                              weaponType(weaponType){
+Villain::Villain(std::string &name, std::string &weaponType, std::string& newPlace): Base("Villain"),
+                                                                                     name(name),
+                                                                                     weaponType(weaponType),
+                                                                                     placeOfLiving(newPlace){
     std::cout << "Villain with parameters created!" << std::endl;
 }
 
 Villain::Villain(Villain &src): Base(src.getType()),
                                 name(src.getName()),
-                                weaponType(src.getWeaponType()){
+                                weaponType(src.getWeaponType()),
+                                placeOfLiving(src.getPlaceOfLiving()){
     std::cout << "Villain copied!" << std::endl;
 }
 
 Villain::~Villain() {
     std::cout << "Villain destroyed!" << std::endl;
+}
+
+const std::string &Villain::getPlaceOfLiving() const {
+    return placeOfLiving;
+}
+
+void Villain::setPlaceOfLiving(const std::string &placeOfLiving) {
+    Villain::placeOfLiving = placeOfLiving;
 }
 
 
