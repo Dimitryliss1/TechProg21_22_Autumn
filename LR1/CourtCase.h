@@ -35,6 +35,7 @@ class CourtCase {
 public:
     CourtCase();
     CourtCase(CourtCase& src);
+    ~CourtCase();
     const Hero &getResponsible() const;
     void setResponsible(const Hero &responsible);
     const Villain &getCriminal() const;

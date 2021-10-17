@@ -113,6 +113,11 @@ void CourtCase::printInfo(std::ostream &out) {
 
 }
 
+CourtCase::~CourtCase() {
+    delete [] monsters;
+    std::cout << "Case destroyed!";
+}
+
 
 
 
