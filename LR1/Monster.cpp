@@ -3,6 +3,9 @@
 //
 
 #include "Monster.h"
+#ifndef LR1_USEFUL_H
+#include "useful.h"
+#endif
 
 const std::string &Monster::getName() const {
     return name;
@@ -37,7 +40,7 @@ Monster::Monster(std::string &name, std::string &description): Base("Monster"),
     std::cout << "Monster with parameters created!" << std::endl;
 }
 
-Monster::Monster(Monster &src): Base(src.getType()),
+Monster::Monster(const Monster &src): Base(src.getType()),
                                 name(src.getName()),
                                 description(src.getDescription()){
     std::cout << "Monster copied!" << std::endl;
@@ -45,6 +48,18 @@ Monster::Monster(Monster &src): Base(src.getType()),
 
 Monster::~Monster() {
     std::cout << "Monster destroyed!" << std::endl;
+}
+
+bool Monster::operator==(const Monster &rhs) const {
+    return name == rhs.name && description == rhs.description;
+}
+
+std::string Monster::getInfoForFile() {
+    char *tmp = nullptr;
+    sprintf(tmp, "%d", get_amt_of_strings(description));
+    std::string a(tmp);
+    delete tmp;
+    return std::string(getType() + "\n" + name + "\n" + a + "\n" + description + "\n");
 }
 
 

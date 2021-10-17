@@ -16,6 +16,7 @@ public:
     explicit Base(std::string newType);
     Base(const Base& character);
     std::string getType() const;
+    virtual std::string getInfoForFile() = 0;
 };
 
 

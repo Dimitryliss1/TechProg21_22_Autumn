@@ -20,7 +20,7 @@ public:
     void printParams(std::ostream &out) override;
     Villain();
     Villain(std::string& name, std::string& weaponType, std::string& newPlace);
-    Villain(Villain& src);
+    Villain(const Villain& src);
     ~Villain();
     const std::string &getName() const;
     void setName(const std::string &name);
@@ -28,6 +28,7 @@ public:
     void setWeaponType(const std::string &weaponType);
     const std::string &getPlaceOfLiving() const;
     void setPlaceOfLiving(const std::string &placeOfLiving);
+    std::string getInfoForFile() override;
 };
 
 

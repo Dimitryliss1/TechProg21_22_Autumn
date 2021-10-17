@@ -26,6 +26,7 @@ public:
     void setWeaponType(const std::string &weaponType);
     const std::string &getAbilities() const;
     void addAbility(const std::string& Ability);
+    std::string getInfoForFile() override;
 };
 
 

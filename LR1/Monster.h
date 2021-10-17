@@ -14,15 +14,17 @@ class Monster: public Base {
     std::string name;
     std::string description;
 public:
-    void printParams(std::ostream& out);
+    void printParams(std::ostream& out) override;
     Monster();
     Monster(std::string& name, std::string& description);
-    Monster(Monster& src);
+    Monster(const Monster& src);
     ~Monster();
     const std::string &getName() const;
     void setName(const std::string &name);
     const std::string &getDescription() const;
     void setDescription(const std::string &description);
+    bool operator==(const Monster &rhs) const;
+    std::string getInfoForFile() override;
 };
 
 

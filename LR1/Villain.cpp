@@ -39,7 +39,7 @@ Villain::Villain(std::string &name, std::string &weaponType, std::string& newPla
     std::cout << "Villain with parameters created!" << std::endl;
 }
 
-Villain::Villain(Villain &src): Base(src.getType()),
+Villain::Villain(const Villain &src): Base(src.getType()),
                                 name(src.getName()),
                                 weaponType(src.getWeaponType()),
                                 placeOfLiving(src.getPlaceOfLiving()){
@@ -56,6 +56,10 @@ const std::string &Villain::getPlaceOfLiving() const {
 
 void Villain::setPlaceOfLiving(const std::string &placeOfLiving) {
     Villain::placeOfLiving = placeOfLiving;
+}
+
+std::string Villain::getInfoForFile() {
+    return std::string(getType() + "\n" + name + "\n" + weaponType + "\n" + placeOfLiving + "\n");
 }
 
 
