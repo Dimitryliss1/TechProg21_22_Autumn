@@ -5,8 +5,8 @@
 #include "Villain.h"
 #include "useful.h"
 
-void Villain::printParams(std::ostream &out) {
-    out << "Name: " << name << std::endl
+void Villain::printParams() {
+    std::cout << "Name: " << name << std::endl
         << "Weapon used: " << weaponType << std::endl;
 }
 
@@ -29,21 +29,24 @@ void Villain::setWeaponType(const std::string &weaponType) {
 Villain::Villain(): Base("Villain"),
                     name("null"),
                     weaponType("null"),
-                    placeOfLiving("null"){
+                    placeOfLiving("null"),
+                    abilities("null"){
     std::cout << "Empty villain created!" << std::endl;
 }
 
-Villain::Villain(std::string &name, std::string &weaponType, std::string& newPlace): Base("Villain"),
+Villain::Villain(std::string &name, std::string &weaponType, std::string& newPlace, std::string& abilities): Base("Villain"),
                                                                                      name(name),
                                                                                      weaponType(weaponType),
-                                                                                     placeOfLiving(newPlace){
+                                                                                     placeOfLiving(newPlace),
+                                                                                     abilities(abilities){
     std::cout << "Villain with parameters created!" << std::endl;
 }
 
 Villain::Villain(const Villain &src): Base(src.getType()),
                                 name(src.getName()),
                                 weaponType(src.getWeaponType()),
-                                placeOfLiving(src.getPlaceOfLiving()){
+                                placeOfLiving(src.getPlaceOfLiving()),
+                                abilities(src.getAbilities()){
     std::cout << "Villain copied!" << std::endl;
 }
 
@@ -64,7 +67,14 @@ std::string Villain::getInfoForFile() {
 }
 
 std::string Villain::getNormalName() {
-    return *to_lower(name);
+    return to_lower(name);
 }
 
+const std::string &Villain::getAbilities() const {
+    return abilities;
+}
+
+void Villain::AddAbilities(const std::string &abilities){
+    Villain::abilities += '\n' + abilities;
+}
 

@@ -14,7 +14,7 @@ class Monster: public Base {
     std::string name;
     std::string description;
 public:
-    void printParams(std::ostream& out) override;
+    void printParams() override;
     Monster();
     Monster(std::string& name, std::string& description);
     Monster(const Monster& src);

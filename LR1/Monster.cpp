@@ -23,8 +23,8 @@ void Monster::setDescription(const std::string &description) {
     Monster::description = description;
 }
 
-void Monster::printParams(std::ostream &out) {
-    out << "Name: " << name << std::endl
+void Monster::printParams() {
+    std::cout << "Name: " << name << std::endl
         << "Description: " << description << std::endl;
 }
 
@@ -63,7 +63,7 @@ std::string Monster::getInfoForFile() {
 }
 
 std::string Monster::getNormalName() {
-    return *to_lower(name);
+    return to_lower(name);
 }
 
 

@@ -29,8 +29,8 @@ void Hero::addAbility(const std::string &Ability) {
     abilities += "\n" + Ability;
 }
 
-void Hero::printParams(std::ostream &out) {
-    out << "Name: " << name << std::endl
+void Hero::printParams() {
+    std::cout << "Name: " << name << std::endl
         << "Weapon Used: " << weaponType << std::endl
         << "Abilities: " << abilities << std::endl;
 }
@@ -68,7 +68,7 @@ std::string Hero::getInfoForFile() {
     return std::string(getType() + "\n" + name + "\n" + weaponType + "\n" + a + "\n" + abilities + "\n");
 }
 
-const std::string &Hero::getNormalName() const {
-    std::string* a = to_lower(name);
-    return *a;
+const std::string Hero::getNormalName() const {
+
+    return to_lower(name);
 }

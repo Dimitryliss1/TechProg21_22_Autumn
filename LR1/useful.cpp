@@ -18,18 +18,19 @@ int safe_input(){
     int res;
     std::cin >> res;
     while (std::cin.fail()){
-        std::cout << "Try again!" << std::endl;
+        std::cin.clear();
+        std::cout << "Try again: ";
         std::cin.ignore(32767, '\n');
+
         std::cin >> res;
     }
     std::cin.ignore();
     return res;
 }
 
-std::string* to_lower(std::string input){
-    std::string* res = new std::string();
-    for (char i : input){
-        res += tolower(i);
+std::string to_lower(std::string src){
+    for (char & i : src){
+        i = tolower(i);
     }
-    return res;
+    return src;
 }

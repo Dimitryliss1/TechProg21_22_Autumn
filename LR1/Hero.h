@@ -15,7 +15,7 @@ class Hero : public Base{
     std::string name, weaponType;
     std::string abilities;
 public:
-    void printParams(std::ostream &out) override;
+    void printParams() override;
     Hero();
     Hero(std::string& newName, std::string& newWeaponType, std::string& newAbilities);
     Hero(const Hero& character);
@@ -28,7 +28,7 @@ public:
     void addAbility(const std::string& Ability);
     std::string getInfoForFile() override;
 
-    const std::string &getNormalName() const;
+    const std::string getNormalName() const;
 };
 
 

@@ -10,7 +10,7 @@
 class Base {
     std::string type;
 public:
-    virtual void printParams(std::ostream &out) = 0;
+    virtual void printParams() = 0;
     virtual ~Base();
     Base();
     explicit Base(std::string newType);
