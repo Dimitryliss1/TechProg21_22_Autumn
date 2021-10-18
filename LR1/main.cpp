@@ -17,7 +17,7 @@ int main() {
                      "0. Quit\n"
                      "Your choice: ";
         int choice = safe_input();
-        while (choice < 0 || choice > 4){
+        while (choice < 0 || choice > 6){
             std::cout << "No such choice!\n"
                          "Try again: ";
             choice = safe_input();
@@ -160,6 +160,9 @@ int main() {
                     }
                 }
             }
+        } else if (choice == 5){
+            std::string tmp = keeper->getStringForFile();
+            std::cout << tmp << std::endl;
         }
     }
     return 0;
