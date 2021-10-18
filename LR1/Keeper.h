@@ -10,19 +10,21 @@
 #include "Hero.h"
 #include "CourtCase.h"
 #include "useful.h"
+#include "exc.h"
 
 class Keeper {
-    static Keeper* instance;
+
     int amt_officers;
-    Hero* officers;
+    Hero** officers;
     int amt_villains;
-    Villain* villains;
+    Villain** villains;
     int amt_monsters;
-    Monster* monsters;
+    Monster** monsters;
     int amt_cases;
-    CourtCase* cases;
+    CourtCase** cases;
     Keeper();
 public:
+
     static Keeper* getInstance();
     ~Keeper();
 
@@ -53,8 +55,9 @@ public:
 
     std::string getStringForFile();
 
-    friend std::ofstream& operator<<(std::ofstream& stream, Keeper& a);
     friend std::ostream& operator<<(std::ostream& stream, Keeper& a);
+
+    void readFromFile(std::string path);
 };
 
 
