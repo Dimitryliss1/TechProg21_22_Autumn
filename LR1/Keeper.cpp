@@ -179,6 +179,7 @@ void Keeper::CreateMonster() {
             std::cout << "Aborting.\n";
             return;
         }
+        std::cin.ignore();
     }
     std::cout << "Pass monster's description. When you want to stop, hit Enter twice after string\n";
     while (true){
@@ -198,7 +199,7 @@ void Keeper::CreateMonster() {
         monsters[index] = new Monster(name, description);
     } else {
         amt_monsters += 1;
-        monsters = (Monster**) realloc (officers, amt_monsters*sizeof(Hero));
+        monsters = (Monster**) realloc (monsters, amt_monsters*sizeof(Monster));
         monsters[amt_monsters-1] = new Monster(name, description);
     }
 }
@@ -268,6 +269,7 @@ void Keeper::CreateCase() {
                      "Try again: ";
         officer = safe_input();
     }
+    std::cin.ignore();
     cases[amt_cases-1]->setResponsible(*officers[officer]);
     std::cout << "What happened? Write down here.\n"
                  "When you want to stop, hit Enter twice after string\n";
@@ -294,15 +296,20 @@ void Keeper::DeleteOfficer() {
             choice = safe_input();
         }
         Hero** tmp = (Hero**) calloc (--amt_officers, sizeof(Hero));
-        for(int i = 0; i < amt_officers; i++){
+        int flag = 0;
+        for(int i = 0; i < amt_officers + 1; i++){
             if (i != choice){
-                tmp[i] = officers[i];
+                tmp[i-flag] = officers[i];
+            } else {
+                flag = 1;
             }
         }
         delete officers[choice];
         free(officers);
         officers = (Hero**) calloc (amt_officers, sizeof(Hero));
-        officers = tmp;
+        for(int i = 0; i < amt_officers; i++){
+            officers[i] = tmp[i];
+        }
         free(tmp);
     } catch (EmptyListException& a){
         std::cout << a.what() << std::endl;
@@ -320,16 +327,20 @@ void Keeper::DeleteVillain() {
             choice = safe_input();
         }
         Villain** tmp = (Villain**) calloc (--amt_villains, sizeof(Villain));
-        for(int i = 0; i < amt_villains; i++){
+        int flag = 0;
+        for(int i = 0; i < amt_villains + 1; i++){
             if (i != choice){
-                tmp[i] = villains[i];
+                tmp[i-flag] = villains[i];
             } else {
+                flag = 1;
             }
         }
         delete villains[choice];
         free(villains);
         villains = (Villain**) calloc (amt_villains, sizeof(Villain));
-        villains = tmp;
+        for(int i = 0; i < amt_villains; i++){
+            villains[i] = tmp[i];
+        }
         free(tmp);
     } catch (EmptyListException& a){
         std::cout << a.what() << std::endl;
@@ -347,15 +358,20 @@ void Keeper::DeleteMonster() {
             choice = safe_input();
         }
         Monster** tmp = (Monster**) calloc (--amt_monsters, sizeof(Monster));
-        for(int i = 0; i < amt_monsters; i++){
+        int flag = 0;
+        for(int i = 0; i < amt_monsters + 1; i++){
             if (i != choice){
-                tmp[i] = monsters[i];
+                tmp[i-flag] = monsters[i];
+            } else {
+                flag = 1;
             }
         }
         delete monsters[choice];
         free(monsters);
         monsters = (Monster**) calloc (amt_monsters, sizeof(Monster));
-        monsters = tmp;
+        for(int i = 0; i < amt_monsters; i++){
+            monsters[i] = tmp[i];
+        }
         free(tmp);
     } catch (EmptyListException& a){
         std::cout << a.what() << std::endl;
@@ -372,16 +388,21 @@ void Keeper::DeleteCase() {
                          "Try again: ";
             choice = safe_input();
         }
+        int flag = 0;
         CourtCase** tmp = (CourtCase**) calloc (--amt_cases, sizeof(CourtCase));
-        for(int i = 0; i < amt_cases; i++){
+        for(int i = 0; i < amt_cases + 1; i++){
             if (i != choice){
-                tmp[i] = cases[i];
+                tmp[i-flag] = cases[i];
+            } else {
+                flag = 1;
             }
         }
         delete cases[choice];
         free(cases);
         cases = (CourtCase**) calloc (amt_cases, sizeof(CourtCase));
-        cases = tmp;
+        for(int i = 0; i < amt_cases; i++){
+            cases[i] = tmp[i];
+        }
         free(tmp);
     } catch (EmptyListException& a){
         std::cout << a.what() << std::endl;
@@ -662,12 +683,13 @@ void Keeper::EditMonster() {
                     }
                 }
             } else if (in_c == 2){
-                std::cout << "Pass case's description. When you want to stop, hit Enter twice after string\n";
+                std::cin.ignore();
+                std::cout << "Pass monster's description. When you want to stop, hit Enter twice after string\n";
                 std::string description;
                 while (true){
                     std::string tmp;
-                    std::getline(std::cin >> std::ws, tmp);
-                    if (tmp == "\n"){
+                    std::getline(std::cin, tmp);
+                    if (tmp.empty()){
                         break;
                     }
                     description += tmp;
@@ -790,29 +812,24 @@ void Keeper::EditCase() {
 
 std::string Keeper::getStringForFile() {
     std::string res;
-    char* a = nullptr;
-    sprintf(a, "%d", amt_officers);
-    res += std::string(a) + "\n";
+    res += std::to_string(amt_officers) + "\n";
     for (int i = 0; i < amt_officers; i++){
-        res += officers[i]->getInfoForFile() + "\n";
+        res += officers[i]->getInfoForFile();
     }
 
-    sprintf(a, "%d", amt_villains);
-    res += std::string(a) + "\n";
+    res += std::to_string(amt_villains) + "\n";
     for (int i = 0; i < amt_villains; i++){
-        res += villains[i]->getInfoForFile() + "\n";
+        res += villains[i]->getInfoForFile();
     }
 
-    sprintf(a, "%d", amt_monsters);
-    res += std::string(a) + "\n";
+    res += std::to_string(amt_monsters) + "\n";
     for (int i = 0; i < amt_monsters; i++){
-        res += monsters[i]->getInfoForFile() + "\n";
+        res += monsters[i]->getInfoForFile();
     }
 
-    sprintf(a, "%d", amt_cases);
-    res += std::string(a) + "\n";
+    res += std::to_string(amt_cases) + "\n";
     for (int i = 0; i < amt_cases; i++){
-        res += cases[i]->getInfoForFile() + "\n";
+        res += cases[i]->getInfoForFile();
     }
     return res;
 }

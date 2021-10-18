@@ -17,14 +17,13 @@ int get_amt_of_strings(std::string& a){
 int safe_input(){
     int res;
     std::cin >> res;
-    while (std::cin.fail()){
+    while (std::cin.fail()) {
         std::cin.clear();
         std::cout << "Try again: ";
         std::cin.ignore(32767, '\n');
 
         std::cin >> res;
     }
-    std::cin.ignore();
     return res;
 }
 

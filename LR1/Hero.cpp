@@ -61,11 +61,15 @@ Hero::~Hero() {
 }
 
 std::string Hero::getInfoForFile() {
-    char *tmp = nullptr;
-    sprintf(tmp, "%d", get_amt_of_strings(abilities));
-    std::string a(tmp);
-    delete tmp;
-    return std::string(getType() + "\n" + name + "\n" + weaponType + "\n" + a + "\n" + abilities + "\n");
+    return std::string(getType() +
+                       "\n" +
+                       name +
+                       "\n" +
+                       weaponType +
+                       "\n" +
+                       std::to_string(get_amt_of_strings(abilities)) +
+                       "\n" +
+                       abilities);
 }
 
 const std::string Hero::getNormalName() const {

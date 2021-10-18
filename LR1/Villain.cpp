@@ -7,7 +7,9 @@
 
 void Villain::printParams() {
     std::cout << "Name: " << name << std::endl
-        << "Weapon used: " << weaponType << std::endl;
+        << "Weapon used: " << weaponType << std::endl
+        << "Place of Living: " << placeOfLiving << std::endl
+        << "Abilities: " << abilities << std::endl;
 }
 
 const std::string &Villain::getName() const {
@@ -63,7 +65,17 @@ void Villain::setPlaceOfLiving(const std::string &placeOfLiving) {
 }
 
 std::string Villain::getInfoForFile() {
-    return std::string(getType() + "\n" + name + "\n" + weaponType + "\n" + placeOfLiving + "\n");
+    return std::string(getType() +
+                       "\n" +
+                       name +
+                       "\n" +
+                       weaponType +
+                       "\n" +
+                       placeOfLiving +
+                       "\n" +
+                       std::to_string(get_amt_of_strings(abilities)) +
+                       "\n" +
+                       abilities);
 }
 
 std::string Villain::getNormalName() {
