@@ -73,7 +73,7 @@ void CourtCase::addMonster(const Monster &monster) {
     if (flag) {
         monsters = (Pair *) realloc(monsters, ++unique_monsters_amt);
         Pair tmp;
-        tmp.first = monster;
+        tmp.first = Monster(monster);
         tmp.second = 1;
         monsters[unique_monsters_amt - 1] = tmp;
     }
@@ -81,22 +81,18 @@ void CourtCase::addMonster(const Monster &monster) {
 
 std::string CourtCase::getInfoForFile() {
     std::string tmp;
-    tmp += responsible.getName() + "\n";
-    tmp += criminal.getName() + "\n";
-    char* a = nullptr;
-    sprintf(a, "%d", unique_monsters_amt);
-    tmp += std::string(a) + "\n";
+    tmp += responsible.getInfoForFile() + "\n";
+    tmp += criminal.getInfoForFile() + "\n";
+
+    tmp += std::to_string(unique_monsters_amt) + "\n";
 
     for(int i = 0; i < unique_monsters_amt; i++){
-        tmp += monsters[i].first.getName() + "\n";
-        sprintf(a, "%d", monsters[i].second);
-        tmp += std::string(a) + "\n";
+        tmp += monsters[i].first.getInfoForFile() + "\n";
+        tmp += std::to_string(monsters[i].second) + "\n";
     }
     tmp += title + "\n";
-    sprintf(a, "%d", get_amt_of_strings(description));
-    tmp += std::string(a) + "\n";
-    tmp += description + "\n";
-    delete a;
+    tmp += std::to_string(get_amt_of_strings(description)) + "\n";
+    tmp += description;
     return tmp;
 }
 
@@ -114,7 +110,7 @@ void CourtCase::printInfo(std::ostream &out) {
 }
 
 CourtCase::~CourtCase() {
-    delete [] monsters;
+    free(monsters);
     std::cout << "Case destroyed!";
 }
 

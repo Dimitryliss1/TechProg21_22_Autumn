@@ -55,11 +55,13 @@ bool Monster::operator==(const Monster &rhs) const {
 }
 
 std::string Monster::getInfoForFile() {
-    char *tmp = nullptr;
-    sprintf(tmp, "%d", get_amt_of_strings(description));
-    std::string a(tmp);
-    delete tmp;
-    return std::string(getType() + "\n" + name + "\n" + a + "\n" + description + "\n");
+    return std::string(getType() +
+                       "\n" +
+                       name +
+                       "\n" +
+                       std::to_string(get_amt_of_strings(description)) +
+                       "\n" +
+                       description);
 }
 
 std::string Monster::getNormalName() {
