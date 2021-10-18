@@ -81,13 +81,13 @@ void CourtCase::addMonster(const Monster &monster) {
 
 std::string CourtCase::getInfoForFile() {
     std::string tmp;
-    tmp += responsible.getInfoForFile() + "\n";
-    tmp += criminal.getInfoForFile() + "\n";
+    tmp += responsible.getInfoForFile();
+    tmp += criminal.getInfoForFile();
 
     tmp += std::to_string(unique_monsters_amt) + "\n";
 
     for(int i = 0; i < unique_monsters_amt; i++){
-        tmp += monsters[i].first.getInfoForFile() + "\n";
+        tmp += monsters[i].first.getInfoForFile();
         tmp += std::to_string(monsters[i].second) + "\n";
     }
     tmp += title + "\n";
