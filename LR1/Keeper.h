@@ -57,7 +57,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& stream, Keeper& a);
 
-    void readFromFile(std::string path);
+    void readFromFile(std::string& path);
 };
 
 

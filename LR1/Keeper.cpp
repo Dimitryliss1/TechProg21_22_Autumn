@@ -2,6 +2,7 @@
 // Created by Павел Жуков on 17/10/2021.
 //
 
+#include <fstream>
 #include "Keeper.h"
 
 Keeper *Keeper::getInstance() {
@@ -837,5 +838,15 @@ std::string Keeper::getStringForFile() {
 std::ostream &operator<<(std::ostream &stream, Keeper &a) {
     stream << a.getStringForFile();
     return stream;
+}
+
+void Keeper::readFromFile(std::string& path) {
+    std::ifstream in;
+    in.open(path);
+    if (in.fail()) {
+        std::cout << "No such file or error in file path\n";
+        return;
+    }
+    //TODO: Add read from file
 }
 
