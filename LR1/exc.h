@@ -19,6 +19,14 @@ public:
     const char* what() const noexcept;
 };
 
+class FormatException: public std::exception
+{
+private:
+    std::string m_error;
 
+public:
+    explicit FormatException(const std::string& error);
+    const char* what() const noexcept;
+};
 
 #endif //LR1_EXC_H

@@ -9,3 +9,9 @@ EmptyListException::EmptyListException(const std::string &error): m_error(error)
 const char *EmptyListException::what() const noexcept{
     return m_error.c_str();
 }
+
+FormatException::FormatException(const std::string &error): m_error(error) {}
+
+const char *FormatException::what() const noexcept{
+    return m_error.c_str();
+}
