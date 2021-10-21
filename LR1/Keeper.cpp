@@ -847,6 +847,88 @@ void Keeper::readFromFile(std::string& path) {
         std::cout << "No such file or error in file path\n";
         return;
     }
-    //TODO: Add read from file
+    for(int i = 0; i < amt_cases; i++){
+        delete cases[i];
+    }
+    free(cases);
+
+    for(int i = 0; i < amt_officers; i++){
+        delete officers[i];
+    }
+    free(officers);
+
+    for(int i = 0; i < amt_villains; i++){
+        delete villains[i];
+    }
+    free(villains);
+
+    for(int i = 0; i < amt_monsters; i++){
+        delete monsters[i];
+    }
+    free(monsters);
+
+    in >> amt_officers;
+    if (in.fail() || !in){
+        throw FormatException("Error reading file");
+    }
+
+    officers = (Hero**) calloc(amt_officers, sizeof(Hero));
+
+    for(int hero = 0; hero < amt_officers; hero++){
+        Hero* tmp = new Hero();
+        try {
+            in >> tmp;
+        } catch(FormatException& a){
+            throw a;
+        }
+        officers[hero] = tmp;
+    }
+
+    in >> amt_villains;
+    if (in.fail() || !in){
+        throw FormatException("Error reading file");
+    }
+
+    villains = (Villain**) calloc(amt_villains, sizeof(Villain));
+
+    for(int hero = 0; hero < amt_villains; hero++){
+        Villain* tmp = new Villain();
+        try {
+            in >> tmp;
+        } catch(FormatException& a){
+            throw a;
+        }
+        villains[hero] = tmp;
+    }
+
+    in >> amt_monsters;
+    if (in.fail() || !in){
+        throw FormatException("Error reading file");
+    }
+    monsters = (Monster**) calloc(amt_monsters, sizeof(Monster));
+    for(int hero = 0; hero < amt_monsters; hero++){
+        Monster* tmp = new Monster();
+        try {
+            in >> tmp;
+        } catch(FormatException& a){
+            throw a;
+        }
+        monsters[hero] = tmp;
+    }
+
+    in >> amt_cases;
+    if (in.fail()){
+        throw FormatException("Error reading file");
+    }
+    cases = (CourtCase**) calloc(amt_cases, sizeof(CourtCase));
+    for(int hero = 0; hero < amt_cases; hero++){
+        CourtCase* tmp = new CourtCase();
+        try {
+            in >> tmp;
+        } catch(FormatException& a){
+            throw a;
+        }
+        cases[hero] = tmp;
+    }
 }
 
