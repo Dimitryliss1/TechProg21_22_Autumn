@@ -65,8 +65,7 @@ void Villain::setPlaceOfLiving(const std::string &placeOfLiving) {
 }
 
 std::string Villain::getInfoForFile() {
-    return std::string(getType() +
-                       "\n" +
+    return std::string("\n" +
                        name +
                        "\n" +
                        weaponType +

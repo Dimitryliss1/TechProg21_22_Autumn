@@ -61,8 +61,7 @@ Hero::~Hero() {
 }
 
 std::string Hero::getInfoForFile() {
-    return std::string(getType() +
-                       "\n" +
+    return std::string("\n" +
                        name +
                        "\n" +
                        weaponType +

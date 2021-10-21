@@ -55,8 +55,7 @@ bool Monster::operator==(const Monster &rhs) const {
 }
 
 std::string Monster::getInfoForFile() {
-    return std::string(getType() +
-                       "\n" +
+    return std::string("\n" +
                        name +
                        "\n" +
                        std::to_string(get_amt_of_strings(description)) +
