@@ -48,6 +48,7 @@ public:
     void addMonster(const Monster& monster);
     void printInfo(std::ostream& out);
     std::string getInfoForFile();
+    friend std::istream& operator>> (std::istream& in, CourtCase* a);
 };
 
 

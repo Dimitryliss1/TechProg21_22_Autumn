@@ -26,6 +26,7 @@ public:
     bool operator==(const Monster &rhs) const;
     std::string getInfoForFile() override;
     std::string getNormalName();
+    friend std::istream& operator>> (std::istream& in, Monster* a);
 };
 
 

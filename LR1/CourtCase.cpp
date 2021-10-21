@@ -4,6 +4,7 @@
 
 #include "CourtCase.h"
 #include "useful.h"
+#include "exc.h"
 
 CourtCase::CourtCase(): responsible(), criminal(), title("null"), description("null"), unique_monsters_amt(0){
     monsters = (Pair*) calloc(0, sizeof(Pair));
@@ -30,7 +31,7 @@ const Hero &CourtCase::getResponsible() const {
 }
 
 void CourtCase::setResponsible(const Hero &responsible) {
-    CourtCase::responsible = responsible;
+    CourtCase::responsible = Hero(responsible);
 }
 
 const Villain &CourtCase::getCriminal() const {
@@ -38,7 +39,7 @@ const Villain &CourtCase::getCriminal() const {
 }
 
 void CourtCase::setCriminal(const Villain &criminal) {
-    CourtCase::criminal = criminal;
+    CourtCase::criminal = Villain(criminal);
 }
 
 int CourtCase::getMonstersAmt() const {
@@ -112,6 +113,53 @@ void CourtCase::printInfo(std::ostream &out) {
 CourtCase::~CourtCase() {
     free(monsters);
     std::cout << "Case destroyed!";
+}
+
+std::istream &operator>>(std::istream &in, CourtCase *a) {
+    try {
+        in >> &(a->responsible);
+    } catch (FormatException& b){
+        throw b;
+    }
+
+    try {
+        in >> &(a->criminal);
+    } catch (FormatException& b){
+        throw b;
+    }
+
+    int n_monsters;
+    in >> n_monsters;
+    if (in.fail()){
+        throw FormatException("Error reading file");
+    }
+
+    for (int i = 0; i < n_monsters; i++){
+        Monster* tmp = new Monster();
+        try {
+            in >> tmp;
+        } catch (FormatException& b){
+            throw b;
+        }
+        a->addMonster(*tmp);
+    }
+
+    std::getline(in >> std::ws, a->title);
+    if (!in) throw FormatException("Error reading file");
+
+    int ab_length;
+    in >> ab_length;
+    if (in.fail()){
+        throw FormatException("Error reading file");
+    }
+    a->description = "";
+    for(int i = 0; i < ab_length; i++){
+        std::string tmp;
+        std::getline(in, tmp);
+        if (!in) throw FormatException("Error reading file");
+        a->description += tmp + '\n';
+    }
+    return in;
 }
 
 

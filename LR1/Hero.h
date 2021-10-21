@@ -29,6 +29,7 @@ public:
     std::string getInfoForFile() override;
 
     const std::string getNormalName() const;
+    friend std::istream& operator>> (std::istream& in, Hero* a);
 };
 
 

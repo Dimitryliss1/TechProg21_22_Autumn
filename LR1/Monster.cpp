@@ -5,6 +5,8 @@
 #include "Monster.h"
 #ifndef LR1_USEFUL_H
 #include "useful.h"
+#include "exc.h"
+
 #endif
 
 const std::string &Monster::getName() const {
@@ -55,8 +57,7 @@ bool Monster::operator==(const Monster &rhs) const {
 }
 
 std::string Monster::getInfoForFile() {
-    return std::string("\n" +
-                       name +
+    return std::string(name +
                        "\n" +
                        std::to_string(get_amt_of_strings(description)) +
                        "\n" +
@@ -65,6 +66,24 @@ std::string Monster::getInfoForFile() {
 
 std::string Monster::getNormalName() {
     return to_lower(name);
+}
+
+std::istream &operator>>(std::istream &in, Monster *a) {
+    std::getline(in >> std::ws, a->name);
+    if (!in) throw FormatException("Error reading file");
+    int ab_length;
+    in >> ab_length;
+    if (in.fail() || !in){
+        throw FormatException("Error reading file");
+    }
+    a->description = "";
+    for(int i = 0; i < ab_length; i++){
+        std::string tmp;
+        std::getline(in, tmp);
+        if (!in) throw FormatException("Error reading file");
+        a->description += tmp + '\n';
+    }
+    return in;
 }
 
 

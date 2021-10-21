@@ -4,6 +4,7 @@
 
 #include "Hero.h"
 #include "useful.h"
+#include "exc.h"
 
 const std::string &Hero::getName() const {
     return name;
@@ -61,8 +62,7 @@ Hero::~Hero() {
 }
 
 std::string Hero::getInfoForFile() {
-    return std::string("\n" +
-                       name +
+    return std::string(name +
                        "\n" +
                        weaponType +
                        "\n" +
@@ -74,4 +74,24 @@ std::string Hero::getInfoForFile() {
 const std::string Hero::getNormalName() const {
 
     return to_lower(name);
+}
+
+std::istream& operator>> (std::istream& in, Hero* a){
+    std::getline(in >> std::ws, a->name);
+    if (!in) throw FormatException("Error reading file");
+    std::getline(in >> std::ws, a->weaponType);
+    if (!in) throw FormatException("Error reading file");
+    int ab_length;
+    in >> ab_length;
+    if (in.fail() || !in){
+        throw FormatException("Error reading file");
+    }
+    a->abilities = "";
+    for(int i = 0; i < ab_length; i++){
+        std::string tmp;
+        std::getline(in, tmp);
+        if (!in) throw FormatException("Error reading file");
+        a->abilities += tmp + '\n';
+    }
+    return in;
 }

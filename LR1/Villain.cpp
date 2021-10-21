@@ -4,6 +4,7 @@
 
 #include "Villain.h"
 #include "useful.h"
+#include "exc.h"
 
 void Villain::printParams() {
     std::cout << "Name: " << name << std::endl
@@ -65,8 +66,7 @@ void Villain::setPlaceOfLiving(const std::string &placeOfLiving) {
 }
 
 std::string Villain::getInfoForFile() {
-    return std::string("\n" +
-                       name +
+    return std::string(name +
                        "\n" +
                        weaponType +
                        "\n" +
@@ -87,5 +87,27 @@ const std::string &Villain::getAbilities() const {
 
 void Villain::AddAbilities(const std::string &abilities){
     Villain::abilities += '\n' + abilities;
+}
+
+std::istream &operator>>(std::istream &in, Villain *a) {
+    std::getline(in >> std::ws, a->name);
+    if (!in) throw FormatException("Error reading file");
+    std::getline(in >> std::ws, a->weaponType);
+    if (!in) throw FormatException("Error reading file");
+    std::getline(in >> std::ws, a->placeOfLiving);
+    if (!in) throw FormatException("Error reading file");
+    int ab_length;
+    in >> ab_length;
+    if (in.fail() || !in){
+        throw FormatException("Error reading file");
+    }
+    a->abilities = "";
+    for(int i = 0; i < ab_length; i++){
+        std::string tmp;
+        std::getline(in, tmp);
+        if (!in) throw FormatException("Error reading file");
+        a->abilities += tmp + '\n';
+    }
+    return in;
 }
 

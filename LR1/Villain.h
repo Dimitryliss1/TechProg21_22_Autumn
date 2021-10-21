@@ -33,6 +33,7 @@ public:
     void AddAbilities(const std::string &abilities);
     std::string getInfoForFile() override;
     std::string getNormalName();
+    friend std::istream& operator>> (std::istream& in, Villain* a);
 };
 
 
