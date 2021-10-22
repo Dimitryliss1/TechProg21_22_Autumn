@@ -77,7 +77,7 @@ std::istream &operator>>(std::istream &in, Monster *a) {
     if (in.fail() || !in){
         throw FormatException("Error reading file");
     }
-    if (ab_length > 0) in.ignore();
+    in.ignore(32767,'\n');
     a->description = "";
     for(int i = 0; i < ab_length; i++){
         std::string tmp;

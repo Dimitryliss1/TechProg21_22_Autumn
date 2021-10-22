@@ -873,7 +873,7 @@ void Keeper::readFromFile(std::string& path) {
         throw FormatException("Error reading file");
     }
 
-    if (amt_officers > 0) in.ignore();
+    in.ignore(32767,'\n');
     officers = (Hero**) calloc(amt_officers, sizeof(Hero));
 
     for(int hero = 0; hero < amt_officers; hero++){
@@ -891,7 +891,7 @@ void Keeper::readFromFile(std::string& path) {
     if (in.fail() || !in){
         throw FormatException("Error reading file");
     }
-    if (amt_villains > 0) in.ignore();
+    in.ignore(32767,'\n');
 
     villains = (Villain**) calloc(amt_villains, sizeof(Villain));
 
@@ -910,7 +910,7 @@ void Keeper::readFromFile(std::string& path) {
     if (in.fail() || !in){
         throw FormatException("Error reading file");
     }
-    if (amt_monsters > 0) in.ignore();
+    in.ignore(32767,'\n');
     monsters = (Monster**) calloc(amt_monsters, sizeof(Monster));
     for(int hero = 0; hero < amt_monsters; hero++){
         Monster* tmp = new Monster();
@@ -923,10 +923,11 @@ void Keeper::readFromFile(std::string& path) {
     }
 
     in >> amt_cases;
-    if (amt_cases > 0) in.ignore();
+
     if (in.fail()){
         throw FormatException("Error reading file");
     }
+    in.ignore(32767,'\n');
     cases = (CourtCase**) calloc(amt_cases, sizeof(CourtCase));
     for(int hero = 0; hero < amt_cases; hero++){
         CourtCase* tmp = new CourtCase();
