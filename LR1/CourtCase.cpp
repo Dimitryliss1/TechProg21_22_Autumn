@@ -7,7 +7,7 @@
 #include "exc.h"
 
 CourtCase::CourtCase(): responsible(), criminal(), title("null"), description("null"), unique_monsters_amt(0){
-    monsters = (Pair*) calloc(0, sizeof(Pair));
+    monsters = (Pair**) calloc(0, sizeof(Pair));
     std::cout << "Empty Case created!" << std::endl;
 }
 
@@ -16,11 +16,11 @@ CourtCase::CourtCase(CourtCase &src): responsible(src.getResponsible()),
                                       unique_monsters_amt(src.getMonstersAmt()),
                                       title(src.getTitle()),
                                       description(src.getDescription()){
-    monsters = (Pair*) calloc(unique_monsters_amt, sizeof(Pair));
+    monsters = (Pair**) calloc(unique_monsters_amt, sizeof(Pair));
     for(int i = 0; i < unique_monsters_amt; i++){
-        Pair tmp;
-        tmp.first = Monster(src.monsters[i].first);
-        tmp.second = src.monsters[i].second;
+        Pair* tmp = new Pair;
+        tmp->first = Monster(src.monsters[i]->first);
+        tmp->second = src.monsters[i]->second;
         monsters[i] = tmp;
     }
     std::cout << "Case copied!" << std::endl;
@@ -65,17 +65,17 @@ void CourtCase::setDescription(const std::string &description) {
 void CourtCase::addMonster(const Monster &monster) {
     bool flag = true;
     for (int i = 0; i < unique_monsters_amt; i++) {
-        if (monsters[i].first == monster) {
-            monsters[i].second += 1;
+        if (monsters[i]->first == monster) {
+            monsters[i]->second += 1;
             flag = false;
             break;
         }
     }
     if (flag) {
-        monsters = (Pair *) realloc(monsters, ++unique_monsters_amt);
-        Pair tmp;
-        tmp.first = Monster(monster);
-        tmp.second = 1;
+        monsters = (Pair **) realloc(monsters, ++unique_monsters_amt);
+        Pair* tmp = new Pair;
+        tmp->first = Monster(monster);
+        tmp->second = 1;
         monsters[unique_monsters_amt - 1] = tmp;
     }
 }
@@ -88,8 +88,8 @@ std::string CourtCase::getInfoForFile() {
     tmp += std::to_string(unique_monsters_amt) + "\n";
 
     for(int i = 0; i < unique_monsters_amt; i++){
-        tmp += monsters[i].first.getInfoForFile();
-        tmp += std::to_string(monsters[i].second) + "\n";
+        tmp += monsters[i]->first.getInfoForFile();
+        tmp += std::to_string(monsters[i]->second) + "\n";
     }
     tmp += title + "\n";
     tmp += std::to_string(get_amt_of_strings(description)) + "\n";
@@ -105,7 +105,7 @@ void CourtCase::printInfo(std::ostream &out) {
         << "Used monsters: " << "\n";
     for (int i = 0; i < unique_monsters_amt; i++){
         out << i + 1 << ".\n"
-            << monsters[i].second << " of " << monsters[i].first.getName() << "\n\n";
+            << monsters[i]->second << " of " << monsters[i]->first.getName() << "\n\n";
     }
 
 }
@@ -133,7 +133,7 @@ std::istream &operator>>(std::istream &in, CourtCase *a) {
     if (in.fail()){
         throw FormatException("Error reading file");
     }
-
+    if (n_monsters > 0) in.ignore();
     for (int i = 0; i < n_monsters; i++){
         Monster* tmp = new Monster();
         try {
@@ -141,7 +141,10 @@ std::istream &operator>>(std::istream &in, CourtCase *a) {
         } catch (FormatException& b){
             throw b;
         }
-        a->addMonster(*tmp);
+        int n;
+        in >> n;
+        in.ignore();
+        for (int k = 0; k < n; k++) a->addMonster(*tmp);
     }
 
     std::getline(in >> std::ws, a->title);
@@ -149,9 +152,11 @@ std::istream &operator>>(std::istream &in, CourtCase *a) {
 
     int ab_length;
     in >> ab_length;
+
     if (in.fail()){
         throw FormatException("Error reading file");
     }
+    if (ab_length > 0) in.ignore();
     a->description = "";
     for(int i = 0; i < ab_length; i++){
         std::string tmp;

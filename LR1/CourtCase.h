@@ -28,7 +28,7 @@ struct Pair{
 class CourtCase {
     Hero responsible;
     Villain criminal;
-    Pair* monsters;
+    Pair** monsters;
     int unique_monsters_amt;
     std::string title;
     std::string description;
