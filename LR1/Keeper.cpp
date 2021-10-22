@@ -836,7 +836,8 @@ std::string Keeper::getStringForFile() {
 }
 
 std::ostream &operator<<(std::ostream &stream, Keeper &a) {
-    stream << a.getStringForFile();
+    std::string tmp = a.getStringForFile();
+    stream << tmp;
     return stream;
 }
 
@@ -872,6 +873,7 @@ void Keeper::readFromFile(std::string& path) {
         throw FormatException("Error reading file");
     }
 
+    if (amt_officers > 0) in.ignore();
     officers = (Hero**) calloc(amt_officers, sizeof(Hero));
 
     for(int hero = 0; hero < amt_officers; hero++){
@@ -885,9 +887,11 @@ void Keeper::readFromFile(std::string& path) {
     }
 
     in >> amt_villains;
+
     if (in.fail() || !in){
         throw FormatException("Error reading file");
     }
+    if (amt_villains > 0) in.ignore();
 
     villains = (Villain**) calloc(amt_villains, sizeof(Villain));
 
@@ -902,9 +906,11 @@ void Keeper::readFromFile(std::string& path) {
     }
 
     in >> amt_monsters;
+
     if (in.fail() || !in){
         throw FormatException("Error reading file");
     }
+    if (amt_monsters > 0) in.ignore();
     monsters = (Monster**) calloc(amt_monsters, sizeof(Monster));
     for(int hero = 0; hero < amt_monsters; hero++){
         Monster* tmp = new Monster();
@@ -917,6 +923,7 @@ void Keeper::readFromFile(std::string& path) {
     }
 
     in >> amt_cases;
+    if (amt_cases > 0) in.ignore();
     if (in.fail()){
         throw FormatException("Error reading file");
     }

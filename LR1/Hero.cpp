@@ -86,6 +86,7 @@ std::istream& operator>> (std::istream& in, Hero* a){
     if (in.fail() || !in){
         throw FormatException("Error reading file");
     }
+    if (ab_length > 0) in.ignore();
     a->abilities = "";
     for(int i = 0; i < ab_length; i++){
         std::string tmp;
