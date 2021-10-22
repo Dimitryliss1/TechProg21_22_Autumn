@@ -26,6 +26,21 @@ CourtCase::CourtCase(CourtCase &src): responsible(src.getResponsible()),
     std::cout << "Case copied!" << std::endl;
 }
 
+CourtCase::CourtCase(const Hero& responsible, const Villain& criminal, Pair **monsters, int unique,
+                     const std::string &title, const std::string &description) {
+    this->title = title;
+    this->description = description;
+    unique_monsters_amt = unique;
+    this->monsters = (Pair**)calloc(unique_monsters_amt, sizeof(Pair**));
+    for(int i = 0; i < unique_monsters_amt; i++){
+        this->monsters[i] = new Pair;
+        this->monsters[i]->first = Monster(monsters[i]->first);
+        this->monsters[i]->second = monsters[i]->second;
+    }
+    this->responsible = Hero(responsible);
+    this->criminal = Villain(criminal);
+    std::cout << "Created Case with parameters\n";
+}
 const Hero &CourtCase::getResponsible() const {
     return responsible;
 }
@@ -111,6 +126,9 @@ void CourtCase::printInfo(std::ostream &out) {
 }
 
 CourtCase::~CourtCase() {
+    for(int i = 0; i < unique_monsters_amt; i++){
+        delete(monsters[i]);
+    }
     free(monsters);
     std::cout << "Case destroyed!";
 }
@@ -133,7 +151,7 @@ std::istream &operator>>(std::istream &in, CourtCase *a) {
     if (in.fail()){
         throw FormatException("Error reading file");
     }
-    if (n_monsters > 0) in.ignore();
+    in.ignore(32767,'\n');
     for (int i = 0; i < n_monsters; i++){
         Monster* tmp = new Monster();
         try {
@@ -143,7 +161,7 @@ std::istream &operator>>(std::istream &in, CourtCase *a) {
         }
         int n;
         in >> n;
-        in.ignore();
+        in.ignore(32767,'\n');
         for (int k = 0; k < n; k++) a->addMonster(*tmp);
     }
 
@@ -156,7 +174,7 @@ std::istream &operator>>(std::istream &in, CourtCase *a) {
     if (in.fail()){
         throw FormatException("Error reading file");
     }
-    if (ab_length > 0) in.ignore();
+    in.ignore(32767,'\n');
     a->description = "";
     for(int i = 0; i < ab_length; i++){
         std::string tmp;
@@ -166,6 +184,8 @@ std::istream &operator>>(std::istream &in, CourtCase *a) {
     }
     return in;
 }
+
+
 
 
 

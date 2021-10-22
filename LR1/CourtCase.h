@@ -34,6 +34,7 @@ class CourtCase {
     std::string description;
 public:
     CourtCase();
+    CourtCase(const Hero& responsible, const Villain& criminal, Pair** monsters, int unique, const std::string& title, const std::string& description);
     CourtCase(CourtCase& src);
     ~CourtCase();
     const Hero &getResponsible() const;
