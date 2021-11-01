@@ -848,30 +848,15 @@ void Keeper::readFromFile(std::string& path) {
         std::cout << "No such file or error in file path\n";
         return;
     }
-    for(int i = 0; i < amt_cases; i++){
-        delete cases[i];
-    }
-    free(cases);
-
-    for(int i = 0; i < amt_officers; i++){
-        delete officers[i];
-    }
-    free(officers);
-
-    for(int i = 0; i < amt_villains; i++){
-        delete villains[i];
-    }
-    free(villains);
-
-    for(int i = 0; i < amt_monsters; i++){
-        delete monsters[i];
-    }
-    free(monsters);
 
     in >> amt_officers;
     if (in.fail() || !in){
         throw FormatException("Error reading file");
     }
+    for(int i = 0; i < amt_officers; i++){
+        delete officers[i];
+    }
+    free(officers);
 
     in.ignore(32767,'\n');
     officers = (Hero**) calloc(amt_officers, sizeof(Hero));
@@ -891,6 +876,10 @@ void Keeper::readFromFile(std::string& path) {
     if (in.fail() || !in){
         throw FormatException("Error reading file");
     }
+    for(int i = 0; i < amt_villains; i++){
+        delete villains[i];
+    }
+    free(villains);
     in.ignore(32767,'\n');
 
     villains = (Villain**) calloc(amt_villains, sizeof(Villain));
@@ -910,6 +899,10 @@ void Keeper::readFromFile(std::string& path) {
     if (in.fail() || !in){
         throw FormatException("Error reading file");
     }
+    for(int i = 0; i < amt_monsters; i++){
+        delete monsters[i];
+    }
+    free(monsters);
     in.ignore(32767,'\n');
     monsters = (Monster**) calloc(amt_monsters, sizeof(Monster));
     for(int hero = 0; hero < amt_monsters; hero++){
@@ -923,10 +916,14 @@ void Keeper::readFromFile(std::string& path) {
     }
 
     in >> amt_cases;
-
     if (in.fail()){
         throw FormatException("Error reading file");
     }
+    for(int i = 0; i < amt_cases; i++){
+        delete cases[i];
+    }
+
+    free(cases);
     in.ignore(32767,'\n');
     cases = (CourtCase**) calloc(amt_cases, sizeof(CourtCase));
     for(int hero = 0; hero < amt_cases; hero++){
