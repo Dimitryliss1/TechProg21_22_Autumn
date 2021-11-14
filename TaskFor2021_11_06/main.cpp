@@ -161,7 +161,7 @@ int main(){
                 std::cin >> num;
             }
             if (num == 1) {
-                stckmnu(1);
+                stckmnu((long long) 1);
             } else if (num == 2) {
                 stckmnu('a');
             } else if (num == 3) {
