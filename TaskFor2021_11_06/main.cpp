@@ -65,6 +65,7 @@ void stckmnu(T param){
         a = new SetOfStacks<T>(size);
     }
     while (true){
+        a->print();
         std::cout << "Choose task:\n"
                      "1. Push value.\n"
                      "2. Pop value.\n"
@@ -77,7 +78,6 @@ void stckmnu(T param){
             std::cin.clear();
             std::cout << "Try again: ";
             std::cin.ignore(32767, '\n');
-
             std::cin >> choice;
         }
         if (choice == 0) break;
@@ -96,7 +96,6 @@ void stckmnu(T param){
                 std::cin.clear();
                 std::cout << "Try again: ";
                 std::cin.ignore(32767, '\n');
-
                 std::cin >> val;
             }
             a->push(val);
