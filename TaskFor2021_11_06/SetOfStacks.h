@@ -18,6 +18,7 @@ public:
     SetOfStacks(int limit);
     void push(T val);
     T pop();
+    void print();
 };
 
 

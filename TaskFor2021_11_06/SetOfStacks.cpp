@@ -28,3 +28,10 @@ T SetOfStacks<T>::pop() {
     return res;
 }
 
+template<typename T>
+void SetOfStacks<T>::print() {
+    for(int i = 0; i < stacks.size(); i++){
+        std::cout << "Top of stack " << i << ": " << stacks[i].top() << std::endl;
+    }
+}
+
