@@ -20,10 +20,11 @@ public:
     MyArr(const MyArr<T>& src);
     MyArr(int sz);
     ~MyArr();
-    void sort(bool comparator(T*, T*));
-    void operator >> (T* right);
-    T operator << (int right);
+    void sort(bool comparator(T&, T&));
+    void operator << (T right);
+    T operator >> (int right);
     T operator[](int index) const;
+    void push(T val);
     int getsz();
 };
 
@@ -59,8 +60,16 @@ MyArr<T>::MyArr(int _sz) {
 }
 
 template<class T>
-void MyArr<T>::sort(bool comparator(T*, T*)) {
-    sort(arr, arr + sz, comparator);
+void MyArr<T>::sort(bool comparator(T&, T&)) {
+    for(int i = 1; i < sz; i++){
+        for (int j = 0; j < sz - i; j++){
+            if (comparator(arr[j+1], arr[j])){
+                T tmp = arr[j + 1];
+                arr[j + 1] = arr[j];
+                arr[j] = tmp;
+            }
+        }
+    }
 }
 
 template<class T>
@@ -78,17 +87,17 @@ MyArr<T>::~MyArr() {
 }
 
 template<class T>
-void MyArr<T>::operator>>(T *right) {
+void MyArr<T>::operator<<(T right) {
     if (sz == 0){
         sz++;
         arr = new T [sz];
-        arr[0] = T(&right);
+        arr[0] = right;
     } else {
         std::cout << "Pass the place to insert the element.\n"
                      "Available positions: from " << 0 << " to " << sz << "\n"
                      "Your choice: ";
         int res = safe_input();
-        while (res < 0 || res >= sz){
+        while (res < 0 || res > sz){
             std::cout << "Wrong position. Try again: ";
             res = safe_input();
         }
@@ -97,9 +106,9 @@ void MyArr<T>::operator>>(T *right) {
         int i2 = 0;
         for(int i = 0; i < sz; i++){
             if (i == res){
-                arr[i] = T(&right);
+                arr[i] = right;
             } else {
-                arr[i] = T(tmp[i2++]);
+                arr[i] = tmp[i2++];
             }
         }
         delete [] tmp;
@@ -107,7 +116,7 @@ void MyArr<T>::operator>>(T *right) {
 }
 
 template<class T>
-T MyArr<T>::operator<<(int right) {
+T MyArr<T>::operator>>(int right) {
     if (right < 0 || right >= sz){
         throw std::exception();
     }
@@ -127,6 +136,17 @@ T MyArr<T>::operator<<(int right) {
         arr[i] = tmp[i2++];
     }
     return res;
+}
+
+template<class T>
+void MyArr<T>::push(T val) {
+    T* tmp = arr;
+    arr = new T [++sz];
+    for (int i = 0; i < sz - 1; i++){
+        arr[i] = T(tmp[i]);
+    }
+    arr[sz - 1] = T(val);
+    delete [] tmp;
 }
 
 
