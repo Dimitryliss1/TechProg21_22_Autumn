@@ -66,26 +66,41 @@ std::string Aeroflot::getGraphDesc() {
           "[label=" +
           "\"" +
           flightNo +
-          "\n" +
+          "|" +
           planeType +
           "\"" +
           "];\n";
     return tmp;
 }
 
-std::istream &operator>>(std::istream &in, Aeroflot *right) {
+std::istream &operator>>(std::istream &in, Aeroflot& right) {
     std::cout << "Type in city of origin. First word will be read: ";
-    in >> right->origin;
+    in >> right.origin;
     in.ignore(32767, '\n');
     std::cout << "Type in destination. First word will be read: ";
-    in >> right->destination;
+    in >> right.destination;
     in.ignore(32767, '\n');
     std::cout << "Type in flightNo. First word will be read: ";
-    in >> right->flightNo;
+    in >> right.flightNo;
     in.ignore(32767, '\n');
     std::cout << "Type in planeType. First word will be read: ";
-    in >> right->planeType;
+    in >> right.planeType;
     in.ignore(32767, '\n');
+    return in;
+}
 
+std::ostream &operator<<(std::ostream &out, Aeroflot right) {
+    out << "Flight No: " << right.getFlightNo() << std::endl
+        << "from " << right.getOrigin() << " to " << right.getDestination() << std::endl
+        << "Aircraft: " << right.getPlaneType() << std::endl;
+    return out;
+}
+
+Aeroflot &Aeroflot::operator=(Aeroflot &right) {
+    this->destination = right.destination;
+    this->planeType = right.planeType;
+    this->flightNo = right.flightNo;
+    this->origin = right.origin;
+    return *this;
 }
 

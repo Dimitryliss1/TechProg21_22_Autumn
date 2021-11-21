@@ -26,7 +26,9 @@ public:
     const std::string &getFlightNo() const;
     void setFlightNo(const std::string &flightNo);
     std::string getGraphDesc();
-    friend std::istream& operator >> (std::istream& in, Aeroflot* right);
+    friend std::istream& operator >> (std::istream& in, Aeroflot& right);
+    friend std::ostream& operator << (std::ostream& out, Aeroflot right);
+    Aeroflot& operator=(Aeroflot& right);
     ~Aeroflot();
 };
 
