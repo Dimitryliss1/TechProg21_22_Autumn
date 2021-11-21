@@ -69,7 +69,23 @@ std::string Aeroflot::getGraphDesc() {
           "\n" +
           planeType +
           "\"" +
-          "];";
+          "];\n";
     return tmp;
+}
+
+std::istream &operator>>(std::istream &in, Aeroflot *right) {
+    std::cout << "Type in city of origin. First word will be read: ";
+    in >> right->origin;
+    in.ignore(32767, '\n');
+    std::cout << "Type in destination. First word will be read: ";
+    in >> right->destination;
+    in.ignore(32767, '\n');
+    std::cout << "Type in flightNo. First word will be read: ";
+    in >> right->flightNo;
+    in.ignore(32767, '\n');
+    std::cout << "Type in planeType. First word will be read: ";
+    in >> right->planeType;
+    in.ignore(32767, '\n');
+
 }
 
