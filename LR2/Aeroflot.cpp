@@ -66,7 +66,7 @@ std::string Aeroflot::getGraphDesc() {
           "[label=" +
           "\"" +
           flightNo +
-          "|" +
+          "\\" + "n" +
           planeType +
           "\"" +
           "];\n";
