@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <fstream>
 #include "Aeroflot.h"
 #include "MyArr.h"
 
@@ -50,15 +51,16 @@ int main() {
                     std::string tmp;
                     std::cin >> tmp;
                     std::cin.ignore(32767, '\n');
-                    MyArr<Aeroflot>res2;
+                    bool flag = false;
                     for(int i = 0; i < flights.getsz(); i++){
                         if (to_lower(flights[i].getPlaneType()) == to_lower(tmp)){
                             std::cout << flights[i];
+                            flag = true;
                         }
                     }
-                    res2.sort(comp);
-                    for(int i = 0; i < res2.getsz(); i++){
-                        std::cout << res2[i];
+
+                    if (!flag) {
+                        std::cout << "No flight matching your query found.\n";
                     }
                 }
                 if (choice2 == 3){
@@ -140,8 +142,54 @@ int main() {
             }
         }
         if(choice == 2){
+            // Предложением считаеся последовательность слов, причем после последнего слова предложения идет точка
+            // без разделителя. После точки идет пробел и следующее предложение.
+            std::cout << "Type in absolute or relative path to .txt file >> ";
+            std::string path;
+            std::cin >> path;
+            std::ifstream fin(path);
+            while (!fin){
+                std::cout << "Error occurred during file opening. "
+                             "Try again with other file\n"
+                             ">> ";
+                std::cin >> path;
+                fin.open(path);
+            }
+            std::string sentences[3];
+            std::stringstream sent;
+            int strcnt = 0;
+            while (fin && strcnt != 3){
+                std::string a;
+                fin >> a;
+                sent << a;
+                if (a[a.size() - 1] == '.' && a.size() != 1){
+                    sentences[strcnt++] = sent.str();
+                    sent.str("");
+                } else {
+                    sent << ' ';
+                }
+            }
+            if (strcnt != 3){
+                std::cout << "File does not contain three sentences";
+            } else {
+                std::cout << "Pass the path to the output file.\n"
+                             "The contents of the file will be erased if present.\n"
+                             ">> ";
+                std::string opath;
+                std::cin >> opath;
+                std::ofstream fout(opath);
+                while (!fout){
+                    std::cout << "Error occurred during file opening. "
+                                 "Try again with other file\n"
+                                 ">> ";
+                    std::cin >> opath;
+                    fout.open(opath);
+                }
+                for(int i = 2; i > -1; i--){
+                    std::cout << sentences[i] << "\n";
+                }
+            }
 
-            //TODO:this part
         }
     }
 }
