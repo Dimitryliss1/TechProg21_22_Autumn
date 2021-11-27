@@ -60,16 +60,24 @@ int main() {
                     }
 
                     if (!flag) {
-                        std::cout << "No flight matching your query found.\n";
+                        std::cout << "No flights matching your query found.\n";
                     }
                 }
                 if (choice2 == 3){
+                    if (flights.getsz() == 0){
+                        std::cout << "No flights added.\n";
+                        continue;
+                    }
                     flights.sort(comp);
                     for(int i = 0; i < flights.getsz(); i++){
                         std::cout << flights[i];
                     }
                 }
                 if (choice2 == 4){
+                    if (flights.getsz() == 0){
+                        std::cout << "Nothing to edit!\n";
+                        continue;
+                    }
                     std::cout << "Pass id of flight you want to edit.\n"
                                  "Available ids from 0 to " << flights.getsz() - 1<< ":";
                     int id = safe_input();
@@ -127,6 +135,10 @@ int main() {
                     }
                 }
                 if (choice2 == 5){
+                    if (flights.getsz() == 0){
+                        std::cout << "Nothing to delete!\n";
+                        continue;
+                    }
                     std::cout << "Pass id of flight you want to delete.\n"
                                  "Available ids from 0 to " << flights.getsz() - 1<< ":";
                     int id = safe_input();
