@@ -182,21 +182,8 @@ int main() {
                 }
             }
             if (strcnt != 3){
-                std::cout << "File does not contain three sentences";
+                std::cout << "File does not contain three sentences\n";
             } else {
-                std::cout << "Pass the path to the output file.\n"
-                             "The contents of the file will be erased if present.\n"
-                             ">> ";
-                std::string opath;
-                std::cin >> opath;
-                std::ofstream fout(opath);
-                while (!fout){
-                    std::cout << "Error occurred during file opening. "
-                                 "Try again with other file\n"
-                                 ">> ";
-                    std::cin >> opath;
-                    fout.open(opath);
-                }
                 for(int i = 2; i > -1; i--){
                     std::cout << sentences[i] << "\n";
                 }
