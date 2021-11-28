@@ -89,7 +89,7 @@ std::istream &operator>>(std::istream &in, Aeroflot& right) {
     return in;
 }
 
-std::ostream &operator<<(std::ostream &out, Aeroflot right) {
+std::ostream &operator<<(std::ostream &out, Aeroflot& right) {
     out << "Flight No: " << right.getFlightNo() << std::endl
         << "from " << right.getOrigin() << " to " << right.getDestination() << std::endl
         << "Aircraft: " << right.getPlaneType() << std::endl;
