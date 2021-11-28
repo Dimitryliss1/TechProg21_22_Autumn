@@ -102,7 +102,7 @@ int main() {
                         if (choice3 == 0) break;
                         if (choice3 == 1){
                             std::string tmpOrigin;
-                            std::cout << "Old value: " << flights[id].getOrigin();
+                            std::cout << "Old value: " << flights[id].getOrigin() << std::endl;
                             std::cout << "New value. First word will be read: ";
                             std::cin >> tmpOrigin;
                             std::cin.ignore(32767, '\n');
@@ -110,7 +110,7 @@ int main() {
                         }
                         if (choice3 == 2){
                             std::string tmpDestination;
-                            std::cout << "Old value: " << flights[id].getDestination();
+                            std::cout << "Old value: " << flights[id].getDestination() << std::endl;
                             std::cout << "New value. First word will be read: ";
                             std::cin >> tmpDestination;
                             std::cin.ignore(32767, '\n');
@@ -118,19 +118,19 @@ int main() {
                         }
                         if (choice3 == 3){
                             std::string tmpPlaneType;
-                            std::cout << "Old value: " << flights[id].getPlaneType();
+                            std::cout << "Old value: " << flights[id].getPlaneType() << std::endl;
                             std::cout << "New value. First word will be read: ";
                             std::cin >> tmpPlaneType;
                             std::cin.ignore(32767, '\n');
-                            flights[id].setOrigin(tmpPlaneType);
+                            flights[id].setPlaneType(tmpPlaneType);
                         }
                         if (choice3 == 4){
                             std::string tmpFlightNo;
-                            std::cout << "Old value: " << flights[id].getFlightNo();
+                            std::cout << "Old value: " << flights[id].getFlightNo() << std::endl;
                             std::cout << "New value. First word will be read: ";
                             std::cin >> tmpFlightNo;
                             std::cin.ignore(32767, '\n');
-                            flights[id].setOrigin(tmpFlightNo);
+                            flights[id].setFlightNo(tmpFlightNo);
                         }
                     }
                 }
@@ -146,7 +146,8 @@ int main() {
                         std::cout << "Wrong id. Try again: ";
                         id = safe_input();
                     }
-                    std::cout << "Deleted Flight: " << (flights >> id) << std::endl;
+                    auto res = flights >> id;
+                    std::cout << "Deleted Flight: " << res << std::endl;
                 }
                 if (choice2 == 6){
                     std::cout << convertToGRVZ(getGraphDesc(flights));
