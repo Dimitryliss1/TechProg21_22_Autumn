@@ -23,7 +23,7 @@ public:
     void sort(bool comparator(T&, T&));
     void operator << (T right);
     T operator >> (int right);
-    T operator[](int index) const;
+    T& operator[](int index) const;
     void push(T val);
     int getsz();
 };
@@ -73,7 +73,7 @@ void MyArr<T>::sort(bool comparator(T&, T&)) {
 }
 
 template<class T>
-T MyArr<T>::operator[](int index) const{
+T& MyArr<T>::operator[](int index) const{
     if (index < 0 || index >= sz){
         throw std::exception();
     }
@@ -125,6 +125,7 @@ T MyArr<T>::operator>>(int right) {
     if (sz == 1){
         delete [] tmp;
         arr = nullptr;
+        --sz;
         return res;
     }
     arr = new T[--sz];
